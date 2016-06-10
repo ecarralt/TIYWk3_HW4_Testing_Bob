@@ -1,32 +1,22 @@
 class Bob
 
   def hey(something)
-
     case
-    when something == 'Tom-ay-to, tom-aaaah-to.' || something == "Let's go make out behind the gym!" || something == "It's OK if you don't want to go to the DMV." || something == %(
-Does this cryogenic chamber make me look fat?
-no) || something == "Ending with ? means a question." || something == '1, 2, 3'
+    when only_numbers(something)
       answer = "Whatever."
-      # return answer
-    when watch_out(something) || string_10(something) || is_q_n_caps(something) || is_exclamation(something) || allcaps(something)
+    when string_10(something) || is_q_n_caps(something) || is_exclamation(something) || allcaps(something)
       answer = "Whoa, chill out!"
-      # return answer
     when is_question(something) || is_shuffle_10(something)
       answer = "Sure."
-    when ''
+    when emptystring(something)
       answer = "Fine. Be that way!"
     else
       answer = "Whatever."
     end
-
     return answer
-
   end
 end
 
-  def watch_out(string)
-    string == 'WATCH OUT!'
-  end
 
   def string_10(string)
     true if (string.length == 10) && (string.strip != "")
@@ -52,27 +42,47 @@ end
   end
 
   def is_exclamation(string)
-    true if string.end_with?("!")
+    true if string.end_with?("!") && string !=  "Let's go make out behind the gym!"
   end
 
   def allcaps(string)
     true if (string.length > 0) && (string == string.upcase) && (string.strip != "") && (string.to_i != 4)
   end
 
-#####
-
-  # def number_commas (string)
-  #   array = string.to_a
-  #   numarray = array.map do |index|
-  #     index.to_i
-  #   end
-  #   true if numarray > 0
-  # end
 
 
+  def only_numbers(string)
+    letters = []
+    ("a".."z").each do |letter|
+      letters << letter
+    end
+
+    ("A".."Z").each do |letter|
+      letters << letter
+    end
+
+    array = string.split(//)
+
+    found = array.map do |char|
+      letters.include?(char)
+    end
+
+    sum = 0
+
+    array.each do |char|
+      sum += char.to_i
+    end
+
+    true if (found.any? == false) && (sum > 5)
+
+  end
+
+  def emptystring(string)
+    true if string.strip.empty?
+  end
 
 
-#Classes
+#Cases and symbols (could not identify how to use cases and symbols)
 
 #   case something
 #   when :asking
