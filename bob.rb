@@ -25,9 +25,6 @@ end
   def is_question(string)
         if string.end_with?("?")
           true
-        elsif
-          string == "You are, what, like 15?"
-          true
         else
           false
         end
