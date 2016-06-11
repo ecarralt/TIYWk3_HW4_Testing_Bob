@@ -2,8 +2,6 @@ class Bob
 
   def hey(something)
     case
-    when only_numbers(something)
-      answer = "Whatever."
     when is_question(something) #|| is_shuffle_10(something)
       answer = "Sure."
     when emptystring(something)
@@ -15,28 +13,19 @@ class Bob
     end
     return answer
   end
+
 end
 
-
-  # def string_10(string)
-  #   true if (string.length == 10) && (string.strip != "")
-  # end
 
   def is_question(string)
       true if (string.end_with?("?")) == true && (all_caps(string) != true )
   end
-
-  # def is_shuffle_10(string)
-  #   true if (string.length == 10) && (string.end_with?("?"))
-  # end
 
   def is_q_n_caps(string)
     true if (string.end_with?("?")) && (string == string.upcase) #&& (string.to_i != 4)
   end
 
   def all_caps(string)
-
-
     array_chars = string.delete(' ').scan /\w/
 
     capletters = []
@@ -79,36 +68,45 @@ end
     true if string.end_with?("!") && no_of_capitals > 1
   end
 
-  def only_numbers(string)
-    letters = []
-    ("a".."z").each do |letter|
-      letters << letter
-    end
-
-    ("A".."Z").each do |letter|
-      letters << letter
-    end
-
-    array = string.split(//)
-
-    found = array.map do |char|
-      letters.include?(char)
-    end
-
-    sum = 0
-
-    array.each do |char|
-      sum += char.to_i
-    end
-
-    true if (found.any? == false) && (sum > 5)
-
-  end
-
   def emptystring(string)
     true if string.strip.empty?
   end
 
+
+
+###FOR REFERENCE####:
+
+#How to check if a string has only numbers in it? See below.
+
+  # def only_numbers(string)
+  #   letters = []
+  #   ("a".."z").each do |letter|
+  #     letters << letter
+  #   end
+  #
+  #   ("A".."Z").each do |letter|
+  #     letters << letter
+  #   end
+  #
+  #   array = string.split(//)
+  #
+  #   found = array.map do |char|
+  #     letters.include?(char)
+  #   end
+  #
+  #   sum = 0
+  #
+  #   array.each do |char|
+  #     sum += char.to_i
+  #   end
+  #
+  #   true if (found.any? == false) && (sum > 5)
+  #
+  # end
+
+
+
+  ###TO BE REVISITED####
 
 #Cases and symbols (could not identify how to use cases and symbols)
 
