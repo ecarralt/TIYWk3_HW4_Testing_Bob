@@ -39,7 +39,28 @@ end
   end
 
   def is_exclamation(string)
-    true if string.end_with?("!") && string !=  "Let's go make out behind the gym!"
+    array_chars = string.delete(' ').scan /\w/
+
+    capletters = []
+    ("A".."Z").each do |letter|
+      capletters << letter
+    end
+
+
+#here
+    no_of_capitals = 0
+
+    array_chars.each do |char|
+      if capletters.include?(char)
+        no_of_capitals += 1
+      else
+      end
+    end
+
+#here
+
+
+    true if string.end_with?("!") && no_of_capitals > 1
   end
 
   def allcaps(string)
