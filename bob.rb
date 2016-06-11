@@ -4,12 +4,12 @@ class Bob
     case
     when only_numbers(something)
       answer = "Whatever."
-    when string_10(something) || is_q_n_caps(something) || is_exclamation(something) || allcaps(something)
-      answer = "Whoa, chill out!"
-    when is_question(something) || is_shuffle_10(something)
+    when is_question(something) #|| is_shuffle_10(something)
       answer = "Sure."
     when emptystring(something)
       answer = "Fine. Be that way!"
+    when is_q_n_caps(something) || is_exclamation_n_manycapitals(something) || all_caps(something)
+      answer = "Whoa, chill out!"
     else
       answer = "Whatever."
     end
@@ -18,27 +18,25 @@ class Bob
 end
 
 
-  def string_10(string)
-    true if (string.length == 10) && (string.strip != "")
-  end
+  # def string_10(string)
+  #   true if (string.length == 10) && (string.strip != "")
+  # end
 
   def is_question(string)
-        if string.end_with?("?")
-          true
-        else
-          false
-        end
+      true if (string.end_with?("?")) == true && (all_caps(string) != true )
   end
 
-  def is_shuffle_10(string)
-    true if (string.length == 10) && (string.end_with?("?"))
-  end
+  # def is_shuffle_10(string)
+  #   true if (string.length == 10) && (string.end_with?("?"))
+  # end
 
   def is_q_n_caps(string)
-    true if (string.end_with?("?")) && (string == string.upcase) && (string.to_i != 4)
+    true if (string.end_with?("?")) && (string == string.upcase) #&& (string.to_i != 4)
   end
 
-  def is_exclamation(string)
+  def all_caps(string)
+
+
     array_chars = string.delete(' ').scan /\w/
 
     capletters = []
@@ -46,8 +44,29 @@ end
       capletters << letter
     end
 
+    char_count = 0
+    no_of_capitals = 0
 
-#here
+    array_chars.each do |char|
+      char_count += 1
+      if capletters.include?(char)
+        no_of_capitals += 1
+      else
+      end
+    end
+
+    true if char_count == no_of_capitals
+
+  end
+
+  def is_exclamation_n_manycapitals (string)
+    array_chars = string.delete(' ').scan /\w/
+
+    capletters = []
+    ("A".."Z").each do |letter|
+      capletters << letter
+    end
+
     no_of_capitals = 0
 
     array_chars.each do |char|
@@ -57,17 +76,8 @@ end
       end
     end
 
-#here
-
-
     true if string.end_with?("!") && no_of_capitals > 1
   end
-
-  def allcaps(string)
-    true if (string.length > 0) && (string == string.upcase) && (string.strip != "") && (string.to_i != 4)
-  end
-
-
 
   def only_numbers(string)
     letters = []
